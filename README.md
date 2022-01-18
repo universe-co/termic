@@ -8,8 +8,6 @@
 	<br>
 </h1>
 
-> Terminal string styling done right
-
 [![npm dependents](https://badgen.net/npm/dependents/termic)](https://www.npmjs.com/package/termic?activeTab=dependents) [![Downloads](https://badgen.net/npm/dt/termic)](https://www.npmjs.com/package/termic)
 
 <br>
@@ -71,6 +69,8 @@ cli.println(warning("Hello World"));
 ### termic.styler.`<style>[.<style>...](string, textcolor<rgb[255, 255, 255]>, bgcolor<rgb[255, 255, 255]>)`
 
 Example: `termic.styler.underline('Hello', termic.colors.red);`
+
+Example: `termic.styler.underline('Hello', [255, 255, 255] /* white */);`
 
 ### Modifiers
 
