@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Shahzodbek2001/cli-tools.git"
+    "url": "git+https://github.com/Shahzodbek2001/termic.git"
   },
   "keywords": [
     "progress bar",
@@ -28,7 +28,7 @@
   "author": "Shakhzodbek",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Shahzodbek2001/cli-tools/issues"
+    "url": "https://github.com/Shahzodbek2001/termic/issues"
   },
-  "homepage": "https://github.com/Shahzodbek2001/cli-tools#readme"
+  "homepage": "https://github.com/Shahzodbek2001/termic#readme"
 }
