@@ -40,17 +40,21 @@ cli.println("Hello World");
 cli.println(styler.italic.underline("Hello World", colors.red, colors.green));
 ```
 
+<img src="media/example.1.png">
+
 Termic comes with an easy to use composable API where you just chain and nest the styles you want.
 
 ```js
 const { cli, colors, styler } = require("termic");
 
-const println = cli.println;
+const println = cli.println.bind(cli);
 
 println("Hello World");
 
-println(styler.italic.underline("Hello World", null, colors.green));
+println(styler.italic.underline("Hello World", null, colors.blue));
 ```
+
+<img src="media/example.2.png">
 
 Easily define your own themes:
 
@@ -61,8 +65,10 @@ const error = styler(null, colors.red);
 const warning = styler(null, colors.orange);
 
 cli.println(error("Error!"));
-cli.println(warning("Hello World"));
+cli.println(warning("Warning!!!"));
 ```
+
+<img src="media/example.31.png">
 
 ## API
 
@@ -79,11 +85,10 @@ Example: `termic.styler.underline('Hello', [255, 255, 255] /* white */);`
 - `dim` - Make the text have lower opacity.
 - `italic` - Make the text italic. *(Not widely supported)*
 - `underline` - Put a horizontal line below the text. *(Not widely supported)*
-- `overline` - Put a horizontal line above the text. *(Not widely supported)*
+- `doubleline` - Put a double horizontal line below the text. *(Not widely supported)*
 - `inverse`- Invert background and foreground colors.
 - `hidden` - Print the text but make it invisible.
-- `strikethrough` - Puts a horizontal line through the center of the text. *(Not widely supported)*
-- `visible`- Print the text only when Termic has a color level above zero. Can be useful for things that are purely cosmetic.
+- `crossedout` - Puts a horizontal line through the center of the text. *(Not widely supported)*
 
 ### Colors
 
@@ -95,33 +100,8 @@ Example: `termic.styler.underline('Hello', [255, 255, 255] /* white */);`
 - `magenta`
 - `cyan`
 - `white`
-- `blackBright` (alias: `gray`, `grey`)
-- `redBright`
-- `greenBright`
-- `yellowBright`
-- `blueBright`
-- `magentaBright`
-- `cyanBright`
-- `whiteBright`
-
-### Background colors
-
-- `bgBlack`
-- `bgRed`
-- `bgGreen`
-- `bgYellow`
-- `bgBlue`
-- `bgMagenta`
-- `bgCyan`
-- `bgWhite`
-- `bgBlackBright` (alias: `bgGray`, `bgGrey`)
-- `bgRedBright`
-- `bgGreenBright`
-- `bgYellowBright`
-- `bgBlueBright`
-- `bgMagentaBright`
-- `bgCyanBright`
-- `bgWhiteBright`
+- `grey`
+- `orange`
 
 ## Browser support
 

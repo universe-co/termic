@@ -77,7 +77,7 @@ class Renderer {
             {
                 frames: ["-", "\\", "|", "/"],
                 end: "✅"
-            }, styler.effects.italic.underline("Hello") + styler.text([255, 120, 100]).toString("Hello"), "World"
+            }, styler.italic.underline("Hello", [255, 120, 100]), "World"
         ],
         [
             {
@@ -94,4 +94,4 @@ class Renderer {
             }, "Hello", "Earth"
         ]
     ], 5000);
-})()
+})();

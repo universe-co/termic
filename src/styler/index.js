@@ -18,6 +18,27 @@ function Styler(text = "", textcolor = [], bgcolor = []) {
 
 Styler.effects = [];
 
+Object.defineProperty(Styler, 'reset', {
+    get: function () {
+        Styler.effects.push("0");
+        return Styler;
+    }
+});
+
+Object.defineProperty(Styler, 'bold', {
+    get: function () {
+        Styler.effects.push("1");
+        return Styler;
+    }
+});
+
+Object.defineProperty(Styler, 'dim', {
+    get: function () {
+        Styler.effects.push("2");
+        return Styler;
+    }
+});
+
 Object.defineProperty(Styler, 'italic', {
     get: function () {
         Styler.effects.push("3");
@@ -32,7 +53,21 @@ Object.defineProperty(Styler, 'underline', {
     }
 });
 
-Object.defineProperty(Styler, 'select', {
+Object.defineProperty(Styler, 'blink', {
+    get: function () {
+        Styler.effects.push("5");
+        return Styler;
+    }
+});
+
+Object.defineProperty(Styler, 'inverse', {
+    get: function () {
+        Styler.effects.push("7");
+        return Styler;
+    }
+});
+
+Object.defineProperty(Styler, 'hidden', {
     get: function () {
         Styler.effects.push("7");
         return Styler;
