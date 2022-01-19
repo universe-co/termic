@@ -1,6 +1,6 @@
 {
   "name": "termic",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Tools for CLI",
   "main": "./src/index.js",
   "bin": "./src/index.js",
