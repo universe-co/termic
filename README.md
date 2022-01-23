@@ -8,7 +8,11 @@
 	<br>
 </h1>
 
-[![npm dependents](https://badgen.net/npm/dependents/termic)](https://www.npmjs.com/package/termic?activeTab=dependents) [![Downloads](https://badgen.net/npm/dt/termic)](https://www.npmjs.com/package/termic)
+[![Downloads](https://badgen.net/npm/dt/termic)](https://www.npmjs.com/package/termic) 
+[![NPM Version](https://img.shields.io/npm/v/termic.svg?style=flat)](https://www.npmjs.org/package/termic)
+[![NPM Downloads](https://img.shields.io/npm/dm/termic.svg?style=flat)](https://npmcharts.com/compare/termic?minimal=true)
+[![Install Size](https://packagephobia.now.sh/badge?p=termic)](https://packagephobia.now.sh/result?p=termic)
+[![Npm Dependents](https://badgen.net/npm/dependents/termic)](https://www.npmjs.com/package/termic?activeTab=dependents) 
 
 <br>
 

@@ -1,10 +1,10 @@
-const readline = require('readline');
+import * as readline from "readline";
 
 class Cursor {
-    hide() {
+    hide(): void {
         process.stdout.write("\x1b" + "[" + "?25l");
     }
-    show() {
+    show(): void {
         process.stdout.write("\x1b" + "[" + "?25h");
     }
     /**
@@ -12,7 +12,7 @@ class Cursor {
      * @param {number} x 
      * @param {number} y 
      */
-    to(x = 0, y = 0) {
+    to(x: number = 0, y: number = 0): void {
         readline.cursorTo(process.stdout, x, y);
     }
     /**
@@ -20,9 +20,9 @@ class Cursor {
      * @param {number} dx 
      * @param {number} dy 
      */
-    move(dx = 0, dy = 0) {
+    move(dx: number = 0, dy: number = 0): void {
         readline.moveCursor(process.stdout, dx, dy);
     }
 }
 
-module.exports = new Cursor();
+export default new Cursor();

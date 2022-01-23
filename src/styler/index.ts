@@ -1,15 +1,29 @@
-const colorizer = require("./colorizer");
-const { isRGB } = require("../utils/rgb");
+import colorizer from "./colorizer";
+import { isRGB } from "../utils/rgb";
 
-function Styler(text = "", textcolor = [], bgcolor = []) {
+export interface IStyler {
+    (text: string, textcolor: number[], bgcolor: number[]): string | Function;
+    effects: Array<string>;
+    reset: this;
+    bold: this;
+    dim: this;
+    italic: this;
+    underline: this;
+    blink: this;
+    inverse: this;
+    hidden: this;
+    crossedout: this;
+}
+
+const Styler = <IStyler>function (text = "", textcolor = [], bgcolor = []) {
     const result = Styler.effects;
     Styler.effects = [];
 
-    function format(txt) {
+    function format(txt: string) {
         if (isRGB(textcolor)) colorizer.text(textcolor);
         if (isRGB(bgcolor)) colorizer.background(bgcolor);
         if (isRGB(textcolor) || isRGB(bgcolor)) txt = colorizer.toString(txt);
-    
+
         return "\x1b[" + result.join(";") + "m" + txt + "\x1b[0m";
     }
 
@@ -81,4 +95,4 @@ Object.defineProperty(Styler, 'crossedout', {
     }
 });
 
-module.exports = Styler;
+export default Styler;

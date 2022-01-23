@@ -5,7 +5,7 @@ class FPS {
      * @param {number} length 
      * @returns {number}
      */
-    frameFromFrames(frame, length) {
+    frameFromFrames(frame: number, length: number): number {
         while (frame > length) {
             frame -= length;
         }
@@ -13,4 +13,4 @@ class FPS {
     }
 }
 
-module.exports = new FPS();
+export default new FPS();

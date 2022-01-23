@@ -1,34 +1,34 @@
-class Colors{
-    get black() {
+class Colors {
+    get black(): number[] {
         return [0, 0, 0];
     }
-    get red() {
+    get red(): number[] {
         return [255, 0, 0];
     }
-    get green() {
+    get green(): number[] {
         return [0, 255, 0];
     }
-    get yellow() {
+    get yellow(): number[] {
         return [255, 255, 0];
     }
-    get blue() {
+    get blue(): number[] {
         return [0, 0, 255];
     }
-    get magenta() {
+    get magenta(): number[] {
         return [255, 0, 255];
     }
-    get cyan() {
+    get cyan(): number[] {
         return [0, 255, 255];
     }
-    get white() {
+    get white(): number[] {
         return [255, 255, 255];
     }
-    get grey() {
+    get grey(): number[] {
         return [128, 128, 128];
     }
-    get orange() {
+    get orange(): number[] {
         return [255, 165, 0];
     }
 }
 
-module.exports = new Colors;
+export default Colors;

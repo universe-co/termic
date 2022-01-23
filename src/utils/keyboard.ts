@@ -1,4 +1,4 @@
-const readline = require('readline');
+import * as readline from "readline";
 
 class Keyboard {
     constructor() {
@@ -9,9 +9,9 @@ class Keyboard {
      * 
      * @param {function} cb 
      */
-    onkeypress(cb) {
+    onkeypress(cb: Function): void {
         process.stdin.on("keypress", (_, key) => cb(key));
     }
 }
 
-module.exports = new Keyboard();
+export default new Keyboard();

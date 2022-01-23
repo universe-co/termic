@@ -1,19 +1,18 @@
-const readline = require('readline');
+import * as readline from "readline";
 
 class CLI {
-    #rows = 0;
-    constructor() {
-        this.rl = readline.createInterface({
-            input: process.stdin,
-            output: process.stdout
-        });
-    }
+    private rows = 0;
+    private rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+    constructor() { }
     /**
      * 
      * @param {string} msg 
      * @returns 
      */
-    input(msg) {
+    input(msg: string): Promise<string> {
         return new Promise((res, rej) => {
             this.rl.question(msg, res);
         });
@@ -22,10 +21,10 @@ class CLI {
      * 
      * @param  {...string} msg 
      */
-    print(...msgs) {
+    print(...msgs: string[]): void {
         for (const msg of msgs) {
             const formatedMsg = msg.toString().trim().length ? msg + " " : msg;
-            this.#rows += formatedMsg.match(/\n/igm)?.length || 0;
+            this.rows += formatedMsg.match(/\n/igm)?.length || 0;
             process.stdout.write(formatedMsg);
         }
     }
@@ -33,10 +32,10 @@ class CLI {
      * 
      * @param  {...string} msg 
      */
-     println(...msgs) {
+    println(...msgs: string[]): void {
         for (const msg of msgs) {
             const formatedMsg = msg.toString().trim().length ? msg + " \n" : msg + "\n";
-            this.#rows += formatedMsg.match(/\n/igm)?.length || 0;
+            this.rows += formatedMsg.match(/\n/igm)?.length || 0;
             process.stdout.write(formatedMsg);
         }
     }
@@ -44,13 +43,13 @@ class CLI {
      * 
      * @param {number|null} rows 
      */
-    clear(rows = null) {
-        if (rows === null) rows = this.#rows;
+    clear(rows: number | null = null) {
+        if (rows === null) rows = this.rows;
         readline.cursorTo(process.stdout, 0);
         readline.moveCursor(process.stdout, 0, -(rows));
         for (let i = 0; i < rows; i++) this.print("\r");
-        this.#rows = 0;
+        this.rows = 0;
     }
 }
 
-module.exports = new CLI();
+export default CLI;
