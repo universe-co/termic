@@ -2,10 +2,6 @@ import * as readline from "readline";
 
 class CLI {
     private rows = 0;
-    private rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-    });
     constructor() { }
     /**
      * 
@@ -14,7 +10,11 @@ class CLI {
      */
     input(msg: string): Promise<string> {
         return new Promise((res, rej) => {
-            this.rl.question(msg, res);
+            const rl = readline.createInterface({
+                input: process.stdin,
+                output: process.stdout
+            });
+            rl.question(msg, res);
         });
     }
     /**
@@ -33,11 +33,9 @@ class CLI {
      * @param  {...string} msg 
      */
     println(...msgs: string[]): void {
-        for (const msg of msgs) {
-            const formatedMsg = msg.toString().trim().length ? msg + " \n" : msg + "\n";
+            const formatedMsg = msgs.join(" ").toString() + "\n";
             this.rows += formatedMsg.match(/\n/igm)?.length || 0;
             process.stdout.write(formatedMsg);
-        }
     }
     /**
      * 
