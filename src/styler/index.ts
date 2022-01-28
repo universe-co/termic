@@ -83,7 +83,7 @@ Object.defineProperty(Styler, 'inverse', {
 
 Object.defineProperty(Styler, 'hidden', {
     get: function () {
-        Styler.effects.push("7");
+        Styler.effects.push("8");
         return Styler;
     }
 });
