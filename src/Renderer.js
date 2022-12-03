@@ -1,7 +1,51 @@
-const styler = require("./styler");
-const cli = require("./core");
-const cursor = require("./utils/cursor");
-const { frameFromFrames } = require("./utils/fps");
+// const styler = require("./styler");
+// const cli = require("./core");
+// const cursor = require("./utils/cursor");
+// const { frameFromFrames } = require("./utils/fps");
+
+const termic = require("../dist/index.js");
+
+const { styler, colors, cli } = termic;
+
+/**
+ * 
+ * @param {number} frame 
+ * @param {number} length 
+ * @returns {number}
+ */
+function frameFromFrames(frame, length) {
+    while (frame > length) {
+        frame -= length;
+    }
+    return frame;
+}
+
+class Cursor {
+    hide() {
+        process.stdout.write("\x1b" + "[" + "?25l");
+    }
+    show() {
+        process.stdout.write("\x1b" + "[" + "?25h");
+    }
+    /**
+     * 
+     * @param {number} x 
+     * @param {number} y 
+     */
+    to(x = 0, y = 0) {
+        readline.cursorTo(process.stdout, x, y);
+    }
+    /**
+     * 
+     * @param {number} dx 
+     * @param {number} dy 
+     */
+    move(dx = 0, dy = 0) {
+        readline.moveCursor(process.stdout, dx, dy);
+    }
+}
+
+const cursor = new Cursor();
 
 class Renderer {
     #fps = 10;
@@ -50,7 +94,7 @@ class Renderer {
 
                     this.#frame = 1;
                     cursor.show();
-                    cli.rl.close();
+                    // cli.rl.close();
                     res();
                     return void 0;
                 }
@@ -74,10 +118,8 @@ class Renderer {
     renderer.FPS = 24;
     await renderer.render([
         [
-            {
-                frames: ["-", "\\", "|", "/"],
-                end: "✅"
-            }, styler.italic.underline("Hello", [255, 120, 100]), "World"
+            { frames: ["-", "\\", "|", "/"], end: "✅" }, 
+            styler.italic.underline("Hello", [255, 120, 100]), "World"
         ],
         [
             {
@@ -86,10 +128,19 @@ class Renderer {
             }, "Hello", "Earth"
         ]
     ], 5000);
+    renderer.FPS = 4;
     await renderer.render([
         [
             {
-                frames: ["-", "\\", "|", "/"],
+                frames: ["😐", "🙂", "😁", "😆", "😂", "🤣"],
+                end: "✅"
+            }, "Hello", "Earth"
+        ]
+    ], 5000);
+    await renderer.render([
+        [
+            {
+                frames: ["[-----]", "[=----]", "[==---]", "[===--]", "[====-]", "[=====]"],
                 end: "✅"
             }, "Hello", "Earth"
         ]
