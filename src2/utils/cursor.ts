@@ -1,10 +1,10 @@
 import * as readline from "readline";
 
 export function hide(): void {
-    process.stdout.write("\x1b" + "[" + "?25l");
+	process.stdout.write("\x1b" + "[" + "?25l");
 }
 export function show(): void {
-    process.stdout.write("\x1b" + "[" + "?25h");
+	process.stdout.write("\x1b" + "[" + "?25h");
 }
 /**
  * 
@@ -12,7 +12,7 @@ export function show(): void {
  * @param {number} y 
  */
 export function to(x: number = 0, y: number = 0): void {
-    readline.cursorTo(process.stdout, x, y);
+	readline.cursorTo(process.stdout, x, y);
 }
 /**
  * 
@@ -20,5 +20,5 @@ export function to(x: number = 0, y: number = 0): void {
  * @param {number} dy 
  */
 export function move(dx: number = 0, dy: number = 0): void {
-    readline.moveCursor(process.stdout, dx, dy);
+	readline.moveCursor(process.stdout, dx, dy);
 }

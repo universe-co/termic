@@ -67,9 +67,9 @@ export interface IStyler {
 }
 
 class StylerAPI{
-    get reset () {
-        return new StylerAPI;
-    }
+	get reset () {
+		return new StylerAPI;
+	}
 }
 
 export function Styler(text) {

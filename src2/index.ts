@@ -1,6 +1,6 @@
-import Cli from "./core/cli";
-import Colors from "./colors";
-import Styler from "./styler";
+// import Cli from "./core/cli";
+// import Colors from "./colors";
+// import Styler from "./styler";
 
 
 /**
@@ -15,6 +15,6 @@ import Styler from "./styler";
  */
 
 
-export const cli = new Cli();
-export const colors = new Colors();
-export const styler = Styler;
+// export const cli = new Cli();
+// export const colors = new Colors();
+// export const styler = Styler;
