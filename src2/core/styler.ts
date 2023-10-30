@@ -1,60 +1,9 @@
 import Colors from "../../src/colors";
 import * as ansi from "../ansi";
-/*
-// function Styler(...messages: string[]) {
-//     const message = messages.join(" ");
-//     message.split(/(\1xB\[m\S+\1xB\[m)+/);
-// }
-
-// interface IStyler extends Function{
-//     template: string;
-//     reset: this;
-// }
-
-Object.defineProperty(Styler, 'reset', {
-    get: function () {
-        return { ...Styler, value: ansi.reset("template") };
-    }
-});
-
-class Styler extends Function {
-    value: string;
-    constructor() {
-        const format = () => {
-            console.log(this);
-            console.log(this.value);
-        };
-        super(`(${format.toString()})()`);
-        this.value = "TEXT";
-    }
-    get reset(): this {
-        return this.bind({ value: ansi.reset(this.value) });
-    }
-}
-
-// class Styler extends Function {
-//     template: string;
-//     constructor() {
-//         function format() {
-//             console.log(this.value);
-//         }
-//         super(format.toString());
-//         return this.bind(this);
-//     }
-//     get reset(): this {
-//         ansi.reset("template");
-//         return this;
-//     }
-// }
-
-console.log();
-
-
-*/
+import { RGB } from "../utils/rgb";
 
 export interface IStyler {
-    (text: string, textcolor: number[], bgcolor: number[]): string | Function;
-    effects: Array<number[]>;
+    (text: string | Function): string | Function;
     reset: this;
     bold: this;
     dim: this;
@@ -64,16 +13,160 @@ export interface IStyler {
     inverse: this;
     hidden: this;
     crossedout: this;
+    color: (color: RGB) => this;
+    background: (color: RGB) => this;
 }
 
-class StylerAPI{
-	get reset () {
-		return new StylerAPI;
-	}
-}
-
-export function Styler(text) {
+class Styler {
+    private style: any = { begin: [], end: [] };
     
+    get bold() {
+        const [begin, end] = ansi.bold();
+        
+        if (this.style.begin.length === 0) {
+            const res = stylerFactory({ begin: [begin], end: [end] });
+            return res;
+        } else {
+            this.style.begin.push(begin);
+            this.style.end.push(end);
+            return this;
+        }
+    }
+
+    get dim() {
+        const [begin, end] = ansi.dim();
+        if (this.style.begin.length === 0) {
+            const res = stylerFactory({ begin: [begin], end: [end] });
+            return res;
+        } else {
+            this.style.begin.push(begin);
+            this.style.end.push(end);
+            return this;
+        }
+    }
+
+    get italic() {
+        const [begin, end] = ansi.italic();
+        if (this.style.begin.length === 0) {
+            const res = stylerFactory({ begin: [begin], end: [end] });
+            return res;
+        } else {
+            this.style.begin.push(begin);
+            this.style.end.push(end);
+            return this;
+        }
+    }
+
+    get underline() {
+        const [begin, end] = ansi.underline();
+        if (this.style.begin.length === 0) {
+            const res = stylerFactory({ begin: [begin], end: [end] });
+            return res;
+        } else {
+            this.style.begin.push(begin);
+            this.style.end.push(end);
+            return this;
+        }
+    }
+
+    get blink() {
+        const [begin, end] = ansi.blink();
+        if (this.style.begin.length === 0) {
+            const res = stylerFactory({ begin: [begin], end: [end] });
+            return res;
+        } else {
+            this.style.begin.push(begin);
+            this.style.end.push(end);
+            return this;
+        }
+    }
+
+    get inverse() {
+        const [begin, end] = ansi.inverse();
+        if (this.style.begin.length === 0) {
+            const res = stylerFactory({ begin: [begin], end: [end] });
+            return res;
+        } else {
+            this.style.begin.push(begin);
+            this.style.end.push(end);
+            return this;
+        }
+    }
+
+    get hidden() {
+        const [begin, end] = ansi.hidden();
+        if (this.style.begin.length === 0) {
+            const res = stylerFactory({ begin: [begin], end: [end] });
+            return res;
+        } else {
+            this.style.begin.push(begin);
+            this.style.end.push(end);
+            return this;
+        }
+    }
+
+    get crossedout() {
+        const [begin, end] = ansi.crossedout();
+        if (this.style.begin.length === 0) {
+            const res = stylerFactory({ begin: [begin], end: [end] });
+            return res;
+        } else {
+            this.style.begin.push(begin);
+            this.style.end.push(end);
+            return this;
+        }
+    }
+
+    get reset() {
+        const [begin, end] = ansi.reset();
+        if (this.style.begin.length === 0) {
+            const res = stylerFactory({ begin: [begin], end: [end] });
+            return res;
+        } else {
+            this.style.begin.push(begin);
+            this.style.end.push(end);
+            return this;
+        }
+    }
+
+    get color() {
+        return (color: RGB) => {
+            const [begin, end] = ansi.color(color);
+            if (this.style.begin.length === 0) {
+                const res = stylerFactory({ begin: [begin], end: [end] });
+                return res;
+            } else {
+                this.style.begin.push(begin);
+                this.style.end.push(end);
+                return this;
+            }
+        }
+    }
+
+    get background() {
+        return (color: RGB) => {
+            const [begin, end] = ansi.background(color);
+            if (this.style.begin.length === 0) {
+                const res = stylerFactory({ begin: [begin], end: [end] });
+                return res;
+            } else {
+                this.style.begin.push(begin);
+                this.style.end.push(end);
+                return this;
+            }
+        }
+    }
+
 }
 
-Object.setPrototypeOf(Styler, new StylerAPI);
+const stylerFactory = (style: any = { begin: [], end: [] }) => {
+    const f: any = (text: string) => {
+        return f.style.begin.join("") + text + f.style.end.reverse().join("");
+    }
+    Object.setPrototypeOf(f, Styler.prototype);
+    return Object.assign(f, { style });
+}
+
+export const styler: IStyler = stylerFactory();
+
+export default styler;

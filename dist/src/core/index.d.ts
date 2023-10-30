@@ -1,6 +1,5 @@
 declare class CLI {
     private rows;
-    private rl;
     constructor();
     input(msg: string): Promise<string>;
     print(...msgs: string[]): void;

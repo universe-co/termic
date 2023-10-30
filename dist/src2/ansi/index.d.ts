@@ -1,0 +1,12 @@
+import { RGB } from "../utils/rgb";
+export declare const reset: () => string[];
+export declare const bold: () => string[];
+export declare const dim: () => string[];
+export declare const italic: () => string[];
+export declare const underline: () => string[];
+export declare const blink: () => string[];
+export declare const inverse: () => string[];
+export declare const hidden: () => string[];
+export declare const crossedout: () => string[];
+export declare const color: (rgb: RGB) => string[];
+export declare const background: (rgb: RGB) => string[];
