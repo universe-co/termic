@@ -1,17 +1,18 @@
 import * as readline from "readline";
 
-class Keyboard {
-    constructor() {
-        readline.emitKeypressEvents(process.stdin);
-        process.stdin.setRawMode(true);
-    }
-    /**
-     * 
-     * @param {function} cb 
-     */
-    onkeypress(cb: Function): void {
-        process.stdin.on("keypress", (_, key) => cb(key));
-    }
-}
+type OnKeyPressCB = (key: string) => void;
 
-export default new Keyboard();
+let key = false;
+
+/**
+ * 
+ * @param {function} cb 
+ */
+export function onkeypress(cb: OnKeyPressCB): void {
+	if (!key) {
+		readline.emitKeypressEvents(process.stdin);
+		process.stdin.setRawMode(true);
+		key = !key;
+	}
+	process.stdin.on("keypress", (_: never, key: string) => cb(key));
+}

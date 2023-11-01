@@ -1,8 +1,4 @@
-declare class Cursor {
-    hide(): void;
-    show(): void;
-    to(x?: number, y?: number): void;
-    move(dx?: number, dy?: number): void;
-}
-declare const _default: Cursor;
-export default _default;
+export declare function hide(): void;
+export declare function show(): void;
+export declare function to(x?: number, y?: number): void;
+export declare function move(dx?: number, dy?: number): void;

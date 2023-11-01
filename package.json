@@ -6,13 +6,13 @@
   "types": "./dist/src/index.d.ts",
   "scripts": {
     "start": "node .",
-    "lint": "eslint ./src2",
-    "lint-fix": "eslint ./src2 --fix",
+    "lint": "eslint ./src",
+    "lint-fix": "eslint ./src --fix",
     "build": "webpack"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Shahzodbek2001/termic.git"
+    "url": "git+https://github.com/ushakhzodbek/termic.git"
   },
   "keywords": [
     "progress bar",
@@ -34,9 +34,9 @@
   "author": "Shakhzodbek",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Shahzodbek2001/termic/issues"
+    "url": "https://github.com/ushakhzodbek/termic/issues"
   },
-  "homepage": "https://github.com/Shahzodbek2001/termic#readme",
+  "homepage": "https://github.com/ushakhzodbek/termic#readme",
   "devDependencies": {
     "@types/node": "^18.8.0",
     "@typescript-eslint/eslint-plugin": "^5.46.1",

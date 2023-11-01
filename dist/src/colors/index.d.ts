@@ -10,4 +10,5 @@ declare class Colors {
     get grey(): number[];
     get orange(): number[];
 }
-export default Colors;
+declare const _default: Colors;
+export default _default;

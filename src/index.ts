@@ -1,8 +1,3 @@
-import Cli from "./core";
-import Colors from "./colors";
-import Styler from "./styler";
-
-
 /**
  * @example
  * 
@@ -14,7 +9,8 @@ import Styler from "./styler";
  * 
  */
 
-
-export const cli = new Cli();
-export const colors = new Colors();
-export const styler = Styler;
+export { default as colors } from "./colors";
+export * as animations from "./animations";
+export * as cli from "./core/cli";
+export { default as styler } from "./core/styler";
+export { default as renderer } from "./core/renderer";

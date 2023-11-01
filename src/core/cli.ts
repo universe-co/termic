@@ -9,10 +9,14 @@ let rows = 0;
  */
 export function input(msg: string): Promise<string> {
 	return new Promise(res => {
-		readline.createInterface({
+		const rl_interface = readline.createInterface({
 			input: process.stdin,
 			output: process.stdout
-		}).question(msg, res);
+		})
+		rl_interface.question(msg + " ", (answer: string) => {
+			rl_interface.close();
+			res(answer);
+		});
 	});
 }
 /**
@@ -45,4 +49,8 @@ export function clear(rows: number | null = null): void {
 	readline.moveCursor(process.stdout, 0, -(rows));
 	for (let i = 0; i < rows; i++) print("\r");
 	rows = 0;
+}
+
+export function close() {
+	readline.createInterface({ input: process.stdin, output: process.stdout }).close();
 }
