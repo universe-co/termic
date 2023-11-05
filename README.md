@@ -41,7 +41,7 @@ const { cli, colors, styler } = require("termic");
 
 cli.println("Hello World");
 
-cli.println(styler.italic.underline("Hello World", colors.red, colors.green));
+cli.println(styler.background(colors.green).color(colors.red).italic.underline("Hello World"));
 ```
 
 <img src="media/example.1.png">
@@ -51,11 +51,11 @@ Termic comes with an easy to use composable API where you just chain and nest th
 ```js
 const { cli, colors, styler } = require("termic");
 
-const println = cli.println.bind(cli);
+const println = cli.println;
 
 println("Hello World");
 
-println(styler.italic.underline("Hello World", null, colors.blue));
+println(styler.background(colors.blue).italic.underline("Hello World"));
 ```
 
 <img src="media/example.2.png">
@@ -65,8 +65,8 @@ Easily define your own themes:
 ```js
 const { cli, colors, styler } = require("termic");
 
-const error = styler(null, colors.red);
-const warning = styler(null, colors.orange);
+const error = styler.color(colors.red);
+const warning = styler.color(colors.orange);
 
 cli.println(error("Error!"));
 cli.println(warning("Warning!!!"));
@@ -76,11 +76,11 @@ cli.println(warning("Warning!!!"));
 
 ## API
 
-### termic.styler.`<style>[.<style>...](string, textcolor<rgb[255, 255, 255]>, bgcolor<rgb[255, 255, 255]>)`
+### termic.styler.`<style>[.<style>...](string)`
 
-Example: `termic.styler.underline('Hello', termic.colors.red);`
+Example: `termic.styler.color(termic.colors.red).underline('Hello');`
 
-Example: `termic.styler.underline('Hello', [255, 255, 255] /* white */);`
+Example: `termic.styler.color([255, 255, 255] /* white */).underline('Hello');`
 
 ### Modifiers
 
@@ -93,6 +93,8 @@ Example: `termic.styler.underline('Hello', [255, 255, 255] /* white */);`
 - `inverse`- Invert background and foreground colors.
 - `hidden` - Print the text but make it invisible.
 - `crossedout` - Puts a horizontal line through the center of the text. *(Not widely supported)*
+- `color` - Set text color
+- `background` - Set background color
 
 ### Colors
 
