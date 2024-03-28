@@ -12,7 +12,7 @@ export function input(msg: string): Promise<string> {
 		const rl_interface = readline.createInterface({
 			input: process.stdin,
 			output: process.stdout
-		})
+		});
 		rl_interface.question(msg + " ", (answer: string) => {
 			rl_interface.close();
 			res(answer);

@@ -41,7 +41,7 @@ const { cli, colors, styler } = require("termic");
 
 cli.println("Hello World");
 
-cli.println(styler.background(colors.green).color(colors.red).italic.underline("Hello World"));
+cli.println(styler.color(colors.red).background(colors.green).italic.underline("Hello World"));
 ```
 
 <img src="media/example.1.png">
@@ -73,6 +73,64 @@ cli.println(warning("Warning!!!"));
 ```
 
 <img src="media/example.31.png">
+
+Animations:
+
+```js
+const fs = require("node:fs");
+const termic = require("termic");
+
+const cli = termic.cli;
+const styler = termic.styler;
+const color = termic.colors;
+const renderer = termic.renderer;
+const animations = termic.animations;
+
+const sourceFile = "example.txt";
+const destFile = "example_copy.txt";
+
+const progress_bar = renderer.progress(animations.animation1);
+const progress_text = renderer.progress({ frames: ["Copying"] });
+const progress_path_text = renderer.progress({ frames: [`${sourceFile} => ${destFile}`] });
+
+const FAIL = styler.color([24, 24, 24]).background(color.red).bold(" FAIL ");
+const DONE = styler.color([24, 24, 24]).background(color.green).bold(" DONE ");
+
+fs.stat(sourceFile, function (err, stat) {
+    const filesize = stat.size;
+    let bytesCopied = 0;
+
+    const readStream = fs.createReadStream(sourceFile)
+
+    readStream.on('data', function (buffer) {
+        bytesCopied += buffer.length;
+        let porcentage = ((bytesCopied / filesize) * 100).toFixed(2);
+        progress_bar.set(porcentage);
+    });
+
+    readStream.on('end', function () {
+        progress_bar.end(DONE);
+        progress_text.end(styler.color([86, 185, 127])("Copyed"));
+        progress_path_text.end(styler.color([86, 185, 127])(`${sourceFile} => ${destFile}`));
+    });
+
+    readStream.on('error', function () {
+        progress_bar.end(FAIL);
+        progress_text.end(styler.color(color.red)("Error"));
+        progress_path_text.end(styler.color(color.red)(`${sourceFile} => ${destFile}`));
+    });
+
+    readStream.pipe(fs.createWriteStream(destFile));
+});
+
+renderer.render([
+    [styler.bold("Copying following files:")],
+    [""],
+    [" ", progress_bar, progress_path_text, progress_text, animations.simpleDots],
+]);
+```
+
+<img src="media/example.4.gif">
 
 ## API
 
