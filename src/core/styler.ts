@@ -1,10 +1,9 @@
 import { colors as Colors, Color, Background } from "../../src/colors";
 import * as ansi from "../ansi";
-import { RGB } from "../utils/rgb";
 
 export interface IStyler {
 	style: any;
-    (text: string | Function): string | Function;
+    (text: string): string;
     reset: this;
     bold: this;
     dim: this;
