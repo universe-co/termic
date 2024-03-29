@@ -1,7 +1,7 @@
 import { Color, Background } from "../../src/colors";
 export interface IStyler {
     style: any;
-    (text: string | Function): string | Function;
+    (text: string): string;
     reset: this;
     bold: this;
     dim: this;
