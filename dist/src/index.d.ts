@@ -1,4 +1,4 @@
-export { default as colors } from "./colors";
+export { colors } from "./colors";
 export * as animations from "./animations";
 export * as cli from "./core/cli";
 export { default as styler } from "./core/styler";

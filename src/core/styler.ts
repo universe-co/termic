@@ -1,8 +1,9 @@
-import Colors from "../../src/colors";
+import { colors as Colors, Color, Background } from "../../src/colors";
 import * as ansi from "../ansi";
 import { RGB } from "../utils/rgb";
 
 export interface IStyler {
+	style: any;
     (text: string | Function): string | Function;
     reset: this;
     bold: this;
@@ -13,8 +14,8 @@ export interface IStyler {
     inverse: this;
     hidden: this;
     crossedout: this;
-    color: (color: RGB) => this;
-    background: (color: RGB) => this;
+    color: Color;
+    background: Background;
 }
 
 class Styler {
@@ -129,37 +130,17 @@ class Styler {
 		}
 	}
 
-	get color() {
-		return (color: RGB) => {
-			const [begin, end] = ansi.color(color);
-			if (this.style.begin.length === 0) {
-				const res = stylerFactory({ begin: [begin], end: [end] });
-				return res;
-			} else {
-				this.style.begin.push(begin);
-				this.style.end.push(end);
-				return this;
-			}
-		};
+	get color(): Color {
+		return new Color(this as any);
 	}
 
-	get background() {
-		return (color: RGB) => {
-			const [begin, end] = ansi.background(color);
-			if (this.style.begin.length === 0) {
-				const res = stylerFactory({ begin: [begin], end: [end] });
-				return res;
-			} else {
-				this.style.begin.push(begin);
-				this.style.end.push(end);
-				return this;
-			}
-		};
+	get background(): Background {
+		return new Background(this as any);
 	}
 
 }
 
-const stylerFactory = (style: any = { begin: [], end: [] }) => {
+export const stylerFactory = (style: any = { begin: [], end: [] }) => {
 	const f: any = (text: string) => {
 		return f.style.begin.join("") + text + f.style.end.reverse().join("");
 	};

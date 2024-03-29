@@ -1,5 +1,6 @@
-import { RGB } from "../utils/rgb";
+import { Color, Background } from "../../src/colors";
 export interface IStyler {
+    style: any;
     (text: string | Function): string | Function;
     reset: this;
     bold: this;
@@ -10,8 +11,9 @@ export interface IStyler {
     inverse: this;
     hidden: this;
     crossedout: this;
-    color: (color: RGB) => this;
-    background: (color: RGB) => this;
+    color: Color;
+    background: Background;
 }
+export declare const stylerFactory: (style?: any) => any;
 export declare const styler: IStyler;
 export default styler;
