@@ -41,7 +41,7 @@ const { cli, colors, styler } = require("termic");
 
 cli.println("Hello World");
 
-cli.println(styler.color(colors.red).background(colors.green).italic.underline("Hello World"));
+cli.println(styler.color.red.background.green.italic.underline("Hello World"));
 ```
 
 <img src="media/example.1.png">
@@ -55,7 +55,7 @@ const println = cli.println;
 
 println("Hello World");
 
-println(styler.background(colors.blue).italic.underline("Hello World"));
+println(styler.background.blue.italic.underline("Hello World"));
 ```
 
 <img src="media/example.2.png">
@@ -65,8 +65,8 @@ Easily define your own themes:
 ```js
 const { cli, colors, styler } = require("termic");
 
-const error = styler.color(colors.red);
-const warning = styler.color(colors.orange);
+const error = styler.color.red;
+const warning = styler.color.orange;
 
 cli.println(error("Error!"));
 cli.println(warning("Warning!!!"));
@@ -79,6 +79,7 @@ Animations:
 ```js
 const fs = require("node:fs");
 const termic = require("termic");
+const RGB = require("termic/dist/src/utils/rgb");
 
 const cli = termic.cli;
 const styler = termic.styler;
@@ -93,8 +94,8 @@ const progress_bar = renderer.progress(animations.animation1);
 const progress_text = renderer.progress({ frames: ["Copying"] });
 const progress_path_text = renderer.progress({ frames: [`${sourceFile} => ${destFile}`] });
 
-const FAIL = styler.color([24, 24, 24]).background(color.red).bold(" FAIL ");
-const DONE = styler.color([24, 24, 24]).background(color.green).bold(" DONE ");
+const FAIL = styler.color.rgb([24, 24, 24] as RGB).background.red.bold(" FAIL ");
+const DONE = styler.color.rgb([24, 24, 24] as RGB).background.green.bold(" DONE ");
 
 fs.stat(sourceFile, function (err, stat) {
     const filesize = stat.size;
@@ -110,14 +111,14 @@ fs.stat(sourceFile, function (err, stat) {
 
     readStream.on('end', function () {
         progress_bar.end(DONE);
-        progress_text.end(styler.color([86, 185, 127])("Copyed"));
-        progress_path_text.end(styler.color([86, 185, 127])(`${sourceFile} => ${destFile}`));
+        progress_text.end(styler.color.rgb([86, 185, 127] as RGB)("Copyed"));
+        progress_path_text.end(styler.color.rgb([86, 185, 127] as RGB)(`${sourceFile} => ${destFile}`));
     });
 
     readStream.on('error', function () {
         progress_bar.end(FAIL);
-        progress_text.end(styler.color(color.red)("Error"));
-        progress_path_text.end(styler.color(color.red)(`${sourceFile} => ${destFile}`));
+        progress_text.end(styler.color.red("Error"));
+        progress_path_text.end(styler.color.red(`${sourceFile} => ${destFile}`));
     });
 
     readStream.pipe(fs.createWriteStream(destFile));
@@ -136,9 +137,37 @@ renderer.render([
 
 ### termic.styler.`<style>[.<style>...](string)`
 
-Example: `termic.styler.color(termic.colors.red).underline('Hello');`
+Example: `termic.styler.underline('Hello');`
 
-Example: `termic.styler.color([255, 255, 255] /* white */).underline('Hello');`
+Example: `termic.styler.italic('Hello');`
+
+### termic.styler.color.`<color>[.<style>...](string)`
+
+Example: `termic.styler.color.red.underline('Hello');`
+
+### termic.styler.background.`<background>[.<style>...](string)`
+
+Example: `termic.styler.background.red.underline('Hello');`
+
+### termic.styler.color.`<rgb | hex>[.<style>...](string)`
+
+Example: `termic.styler.color.hex('#ffffff')('Hello');`
+
+Example: `termic.styler.color.hex('#ffffff').bold('Hello');`
+
+Example: `termic.styler.color.rgb([255, 255, 0] as RGB)('Hello');`
+
+Example: `termic.styler.color.rgb([255, 255, 0] as RGB).bold('Hello');`
+
+### termic.styler.background.`<rgb | hex>[.<style>...](string)`
+
+Example: `termic.styler.background.hex('#ffffff')('Hello');`
+
+Example: `termic.styler.background.hex('#ffffff').underline('Hello');`
+
+Example: `termic.styler.background.rgb([255, 255, 0] as RGB)('Hello');`
+
+Example: `termic.styler.background.rgb([255, 255, 0] as RGB).underline('Hello');`
 
 ### Modifiers
 
@@ -177,4 +206,4 @@ If you're on Windows, do yourself a favor and use [Windows Terminal](https://git
 
 ## Maintainers
 
-- [Shakhzodbek Utkurov](https://github.com/Shahzodbek2001)
+- [Universe Company](https://github.com/universe-co)
