@@ -1,4 +1,34 @@
 import * as readline from "readline";
+import styler from "./styler";
+
+const formatter = (data: any, _: any = null, for_object: boolean | any = false): string => {
+	const tab = "  ";
+
+	if (data === null) return styler.color.white.bold("null");
+	if (typeof data === "string") {
+		if (for_object) return styler.color.hex("#0DBC5A")(`'${data}'`);
+		return data;
+	}
+	if (typeof data === "number") return styler.color.yellow(data.toString());
+	if (typeof data === "boolean") return styler.color.yellow(data.toString());
+	if (typeof data === "undefined") return styler.color.grey("undefined");
+	if (typeof data === "symbol") return styler.color.hex("#0DBC5A")(data.toString());
+	if (typeof data === "function" && data.toString().startsWith("class")) return styler.color.hex("#11A8AB")(`[class ${data.name}]`);
+	if (typeof data === "function") return styler.color.hex("#11A8AB")(`[Function: ${data.name}]`);
+	if (typeof data === "object") {
+		const result = [];
+		const open = "{ ";
+		const close = " }";
+		for (const key of Object.keys(data)) {
+			result.push(`${key}: ${formatter(data[key], null, true)}`);
+		}
+		if (result.length === 0) return `${open.trim()}${close.trim()}`;
+		if (result.join(", ").length > process.stdout.columns - 4 || result.join(", ").length >= 120) {
+			return `${open.trim()}\n${tab}${result.join(",\n" + tab)}\n${close.trim()}`;
+		}
+		return `${open.trim()} ${result.join(", ")} ${close.trim()}`;
+	}
+};
 
 let rows = 0;
 
@@ -25,7 +55,7 @@ export function input(msg: string): Promise<string> {
  */
 export function print(...msgs: string[]): void {
 	for (const msg of msgs) {
-		const formatedMsg = msg.toString().trim().length ? msg + " " : msg;
+		const formatedMsg = formatter(msg).toString().trim().length ? msg + " " : msg;
 		rows += formatedMsg.match(/\n/igm)?.length || 0;
 		process.stdout.write(formatedMsg);
 	}
@@ -35,7 +65,7 @@ export function print(...msgs: string[]): void {
  * @param  {...string} msg 
  */
 export function println(...msgs: string[]): void {
-	const formatedMsg = msgs.join(" ").toString() + "\n";
+	const formatedMsg = msgs.map(i => formatter(i)).join(" ").toString() + "\n";
 	rows += formatedMsg.match(/\n/igm)?.length || 0;
 	process.stdout.write(formatedMsg);
 }
