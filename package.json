@@ -1,6 +1,6 @@
 {
   "name": "termic",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Tools for CLI",
   "exports": "./dist/index.js",
   "types": "./dist/src/index.d.ts",
