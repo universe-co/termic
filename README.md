@@ -79,11 +79,8 @@ cli.println(warning("Warning!!!"));
 ```js
 const fs = require("node:fs");
 const termic = require("termic");
-const RGB = require("termic/dist/src/utils/rgb");
 
-const cli = termic.cli;
 const styler = termic.styler;
-const color = termic.colors;
 const renderer = termic.renderer;
 const animations = termic.animations;
 
@@ -94,8 +91,8 @@ const progress_bar = renderer.progress(animations.animation1);
 const progress_text = renderer.progress({ frames: ["Copying"] });
 const progress_path_text = renderer.progress({ frames: [`${sourceFile} => ${destFile}`] });
 
-const FAIL = styler.color.rgb([24, 24, 24] as RGB).background.red.bold(" FAIL ");
-const DONE = styler.color.rgb([24, 24, 24] as RGB).background.green.bold(" DONE ");
+const FAIL = styler.color.rgb([24, 24, 24]).background.red.bold(" FAIL ");
+const DONE = styler.color.rgb([24, 24, 24]).background.green.bold(" DONE ");
 
 fs.stat(sourceFile, function (err, stat) {
     const filesize = stat.size;
@@ -111,8 +108,8 @@ fs.stat(sourceFile, function (err, stat) {
 
     readStream.on('end', function () {
         progress_bar.end(DONE);
-        progress_text.end(styler.color.rgb([86, 185, 127] as RGB)("Copyed"));
-        progress_path_text.end(styler.color.rgb([86, 185, 127] as RGB)(`${sourceFile} => ${destFile}`));
+        progress_text.end(styler.color.rgb([86, 185, 127])("Copyed"));
+        progress_path_text.end(styler.color.rgb([86, 185, 127])(`${sourceFile} => ${destFile}`));
     });
 
     readStream.on('error', function () {
@@ -213,9 +210,9 @@ Example: `termic.styler.color.hex('#ffffff')('Hello');`
 
 Example: `termic.styler.color.hex('#ffffff').bold('Hello');`
 
-Example: `termic.styler.color.rgb([255, 255, 0] as RGB)('Hello');`
+Example: `termic.styler.color.rgb([255, 255, 0])('Hello');`
 
-Example: `termic.styler.color.rgb([255, 255, 0] as RGB).bold('Hello');`
+Example: `termic.styler.color.rgb([255, 255, 0]).bold('Hello');`
 
 ### termic.styler.background.`<rgb | hex>[.<style>...](string)`
 
@@ -223,9 +220,9 @@ Example: `termic.styler.background.hex('#ffffff')('Hello');`
 
 Example: `termic.styler.background.hex('#ffffff').underline('Hello');`
 
-Example: `termic.styler.background.rgb([255, 255, 0] as RGB)('Hello');`
+Example: `termic.styler.background.rgb([255, 255, 0])('Hello');`
 
-Example: `termic.styler.background.rgb([255, 255, 0] as RGB).underline('Hello');`
+Example: `termic.styler.background.rgb([255, 255, 0]).underline('Hello');`
 
 ### Modifiers
 

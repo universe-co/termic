@@ -56,7 +56,7 @@ export class ColorFactory {
 		}
 	}
 
-	rgb(color: RGB): IStyler {
+	rgb(color: Array<number>): IStyler {
 		const [begin, end] = this.colorize(color);
 		if (this.styler.style.begin.length === 0) {
 			const res = stylerFactory({ begin: [begin], end: [end] });
