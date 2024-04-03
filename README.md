@@ -46,7 +46,7 @@ cli.println(styler.color.red.background.green.italic.underline("Hello World"));
 
 <img src="media/example.1.png">
 
-Termic comes with an easy to use composable API where you just chain and nest the styles you want.
+### Termic comes with an easy to use composable API where you just chain and nest the styles you want.
 
 ```js
 const { cli, colors, styler } = require("termic");
@@ -60,7 +60,7 @@ println(styler.background.blue.italic.underline("Hello World"));
 
 <img src="media/example.2.png">
 
-Easily define your own themes:
+### Easily define your own themes:
 
 ```js
 const { cli, colors, styler } = require("termic");
@@ -74,7 +74,7 @@ cli.println(warning("Warning!!!"));
 
 <img src="media/example.31.png">
 
-Animations:
+### Animations:
 
 ```js
 const fs = require("node:fs");
@@ -132,6 +132,64 @@ renderer.render([
 ```
 
 <img src="media/example.4.gif">
+
+### Built-in console formatter for printing functions(like println and print):
+
+```js
+const termic = require("termic");
+
+const println = termic.cli.println;
+
+const type_string = "Hello World!!";
+const type_number = 12345;
+const type_arrow_function = (bg) => { hello(); };
+function type_function() { hello(); };
+const type_object = {
+    hello: type_arrow_function,
+    hello2: {
+        fw: "wfqf",
+    }
+}
+const type_symbol = Symbol(type_string);
+const type_null = null;
+const type_undefined = void 0;
+const type_bool = false;
+const type_class = class Example {};
+
+
+println(type_string);
+console.log(type_string);
+
+println(type_number);
+console.log(type_number);
+
+println(type_arrow_function);
+console.log(type_arrow_function);
+
+println(type_function);
+console.log(type_function);
+
+println(type_object);
+console.log(type_object);
+
+println(type_symbol);
+console.log(type_symbol);
+
+println(type_null);
+console.log(type_null);
+
+println(type_undefined);
+console.log(type_undefined);
+
+println(type_bool);
+console.log(type_bool);
+
+println(type_class);
+console.log(type_class);
+
+```
+
+<img src="media/example.5.png">
 
 ## API
 
