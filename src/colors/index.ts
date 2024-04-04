@@ -2,6 +2,8 @@ import { IStyler, stylerFactory } from "../core/styler";
 import * as ansi from "../ansi";
 import { RGB } from "../utils/rgb";
 import { hexToRgb } from "../utils/hex";
+import { hslToRgb } from "../utils/hsl";
+import { hsvToRgb } from "../utils/hsv";
 
 export class Colors {
 	get black(): RGB {
@@ -36,13 +38,37 @@ export class Colors {
 	}
 }
 
-export const colors = new Colors;
+export const colors = new Colors();
 
 export class ColorFactory {
 	constructor(
 		private styler: IStyler,
-		private colorize: Function
+		private colorize: Function,
 	) {}
+
+	hsl(h: number, s: number, l: number): IStyler {
+		const [begin, end] = this.colorize(hslToRgb(h, s, l));
+		if (this.styler.style.begin.length === 0) {
+			const res = stylerFactory({ begin: [begin], end: [end] });
+			return res;
+		} else {
+			this.styler.style.begin.push(begin);
+			this.styler.style.end.push(end);
+			return this.styler;
+		}
+	}
+
+	hsv(h: number, s: number, v: number): IStyler {
+		const [begin, end] = this.colorize(hsvToRgb(h, s, v));
+		if (this.styler.style.begin.length === 0) {
+			const res = stylerFactory({ begin: [begin], end: [end] });
+			return res;
+		} else {
+			this.styler.style.begin.push(begin);
+			this.styler.style.end.push(end);
+			return this.styler;
+		}
+	}
 
 	hex(color: string): IStyler {
 		const [begin, end] = this.colorize(hexToRgb(color));

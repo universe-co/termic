@@ -3,26 +3,26 @@ import * as ansi from "../ansi";
 
 export interface IStyler {
 	style: any;
-    (text: string): string;
-    reset: this;
-    bold: this;
-    dim: this;
-    italic: this;
-    underline: this;
-    blink: this;
-    inverse: this;
-    hidden: this;
-    crossedout: this;
-    color: Color;
-    background: Background;
+	(text: string): string;
+	reset: this;
+	bold: this;
+	dim: this;
+	italic: this;
+	underline: this;
+	blink: this;
+	inverse: this;
+	hidden: this;
+	crossedout: this;
+	color: Color;
+	background: Background;
 }
 
 class Styler {
 	private style: any = { begin: [], end: [] };
-    
+
 	get bold() {
 		const [begin, end] = ansi.bold();
-        
+
 		if (this.style.begin.length === 0) {
 			const res = stylerFactory({ begin: [begin], end: [end] });
 			return res;
@@ -136,7 +136,6 @@ class Styler {
 	get background(): Background {
 		return new Background(this as any);
 	}
-
 }
 
 export const stylerFactory = (style: any = { begin: [], end: [] }) => {

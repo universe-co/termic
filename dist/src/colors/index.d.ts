@@ -17,8 +17,10 @@ export declare class ColorFactory {
     private styler;
     private colorize;
     constructor(styler: IStyler, colorize: Function);
+    hsl(h: number, s: number, l: number): IStyler;
+    hsv(h: number, s: number, v: number): IStyler;
     hex(color: string): IStyler;
-    rgb(color: RGB): IStyler;
+    rgb(color: Array<number> | RGB): IStyler;
     get black(): IStyler;
     get red(): IStyler;
     get green(): IStyler;

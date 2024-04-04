@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npm run format
+npm run lint:fix | echo
+
+files=$(git diff --cached --name-status | awk '{for (i=2; i<NF; i++) printf $i " "; print $NF}' | awk -F, '{print ""substr($1,1,1000)"" }')
+
+git add $files | echo

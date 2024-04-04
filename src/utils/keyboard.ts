@@ -1,12 +1,12 @@
-import * as readline from "readline";
+import readline from "readline";
 
 type OnKeyPressCB = (key: string) => void;
 
 let key = false;
 
 /**
- * 
- * @param {function} cb 
+ *
+ * @param {function} cb
  */
 export function onkeypress(cb: OnKeyPressCB): void {
 	if (!key) {

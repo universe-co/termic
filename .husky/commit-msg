@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+commit_msg=$(cat $1)
+
+msg=$(node $(dirname -- "$0")/scripts/commit.js -- --message "$commit_msg")
+
+echo "$msg" > $1

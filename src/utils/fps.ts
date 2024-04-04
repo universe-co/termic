@@ -1,7 +1,7 @@
 /**
- * 
- * @param {number} frame 
- * @param {number} length 
+ *
+ * @param {number} frame
+ * @param {number} length
  * @returns {number}
  */
 export function frameFromFrames(frame: number, length: number): number {
